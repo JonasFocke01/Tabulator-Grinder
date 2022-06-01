@@ -25,4 +25,4 @@ async function discardTabs() {
   }
 }
 
-setInterval(discardTabs, 60000);
+// setInterval(discardTabs, 60000);
