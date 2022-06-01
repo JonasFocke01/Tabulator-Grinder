@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Tabmanager",
-    "version": "0.1",
+    "version": "1.0.0",
     "description": "Automatically discard or suspend tabs after a short amount of time to preserve system resources",
     "homepage_url": "https://github.com/JonasFocke01/tabmanager-for-firefox",
 
