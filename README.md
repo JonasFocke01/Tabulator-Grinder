@@ -1,0 +1,1 @@
+A firefox plugin to close forgotten tabs and manage the open ones
