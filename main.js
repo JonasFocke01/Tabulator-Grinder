@@ -26,3 +26,5 @@ async function discardTabs() {
 }
 
 // setInterval(discardTabs, 60000);
+
+document.body.style.border = "5px solid red";
