@@ -47,7 +47,15 @@ body {
         <input class="third scaleUp" id="closeNewTabs" type="checkbox" />
         <br>
         <h1>Performance</h1>
-        <p>Comming soon...</p>
+        <p class="first">How many tabs sould be suspended each iteration to free system recources?</p>
+        <select id="discardAmount" class="first">
+            <option value="0">None</option>
+            <option value="0.3">Oldest 1/3</option>
+            <option value="0.5">Oldest half</option>
+            <option value="0.6">Oldest 2/3</option>
+            <option value="0.7">Oldest 3/4</option>
+            <option value="1">Every except the active and pinned</option>
+        </select>
         <br>
         <button id="save" class="scaleUp">Save</button>
     </form>

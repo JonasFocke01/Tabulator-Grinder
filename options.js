@@ -6,11 +6,13 @@ async function saveOptions(e) {
   const tabsToKeepOpen = Number(form.get("tabsToKeepOpen"));
   const closeNewTabs = form.get("closeNewTabs") === "on";
   const frequency = Number(form.get("frequency"));
+  const discardAmount = Number(form.get("discardAmount"));
 
   const options = {
     tabsToKeepOpen,
     closeNewTabs,
     frequency,
+    discardAmount,
   };
 
   browser.storage.local.set(options);
@@ -24,9 +26,6 @@ async function loadOptions() {
     options.closeNewTabs || false;
   document.querySelector("[name=frequency]").value =
     options.frequency || 3600000;
-
-  const regexes = options.regexes || [];
-  for (let regex of regexes) {
-    addRegexInput(regex);
-  }
+  document.querySelector("[name=discardAmount]").value =
+    options.discardAmount || 0;
 }
