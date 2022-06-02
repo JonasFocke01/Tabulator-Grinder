@@ -1,7 +1,16 @@
-const minTabsOpen = 6;
-const intervalInMs = 900000;
+const defaultOptions = {
+  tabsToKeepOpen: 6,
+  closeNewTabs: true,
+  frequency: 5000,
+};
 
-async function discardTabs() {
+async function grindTabs() {
+  console.log("grindTabs");
+  const userOptions = await browser.storage.sync.get();
+  const options = {
+    ...defaultOptions,
+    ...userOptions,
+  };
   let tabs = await browser.tabs.query({
     active: false, // Don't discard the current tab
     pinned: false, // Don't discard pinned tabs
@@ -11,16 +20,19 @@ async function discardTabs() {
     return a.lastAccessed - b.lastAccessed;
   });
 
-  if (minTabsOpen < tabs.length) {
+  if (options.tabsToKeepOpen < tabs.length) {
     browser.tabs.remove(tabs[0].id);
   }
 
-  //close all New Tabs after a few seconds (no time specifyed, because the active window will never close, so you can let it be open forever)
+  //close all New Tabs after a few seconds (no time specifyed, because the active window will never close)
   tabs.forEach((tab) => {
-    if (tab.title === "New Tab") {
+    if (options.closeNewTabs && tab.title === "New Tab") {
       browser.tabs.remove(tab.id);
     }
   });
+  setTimeout(() => {
+    grindTabs();
+  }, options.frequency);
 }
 
-setInterval(discardTabs, intervalInMs);
+grindTabs();

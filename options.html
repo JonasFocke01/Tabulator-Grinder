@@ -1,8 +1,22 @@
 <div>
-    <h1>Organizing</h1>
-    <p>Tabs sould be closed until there are only <input id="tabsToCeepOpen" type="number" min="0" /> NON-PINNED left</p>
-    <p>forgotten new tabs should be closed on each run</p><input id="closeNewTabs" type="checkbox" />
-    <br>
-    <h1>Performance</h1>
-    <p>Comming soon...</p>
+    <form>
+        <h1>General</h1>
+        <p>How often should the plugin run?</p>
+        <select id="frequency">
+            <option value="2000">TEST</option>
+            <option value="60000">Every minute</option>
+            <option value="300000">Every 5 minutes</option>
+            <option value="600000">Every 10 minutes</option>
+            <option value="900000">Every 15 minutes</option>
+            <option value="1800000">Every 30 minutes</option>
+            <option value="3600000">Every hour</option>
+        </select>
+        <h1>Organizing</h1>
+        <p>Tabs sould be closed until there are only <input id="tabsToKeepOpen" type="number" min="0" /> NON-PINNED left</p>
+        <p>forgotten new tabs should be closed on each run</p><input id="closeNewTabs" type="checkbox" />
+        <br>
+        <h1>Performance</h1>
+        <p>Comming soon...</p>
+    </form>
+    <script src="options.js"></script>
 </div>
