@@ -2,11 +2,13 @@
     "manifest_version": 2,
     "name": "Tabulator Grinder",
     "version": "1.0.0",
-    "description": "Automatically discard or suspend tabs after a short amount of time to preserve system resources",
-    "homepage_url": "https://github.com/JonasFocke01/tabmanager-for-firefox",
+    "author": "Jonas Focke",
+    "description": "Manages open tabs by closing forgotten ones and frees system resources.",
+    "homepage_url": "https://github.com/JonasFocke01/Tabulator-Grinder",
 
     "icons": {
-      "48": "icons/manager.png"
+      "48": "icons/table-columns-solid.png",
+      "96": "icons/table-columns-solid.png"
     },
   
     "options_ui": {
