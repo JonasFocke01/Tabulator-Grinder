@@ -15,6 +15,7 @@ async function grindTabs() {
   let tabs = await browser.tabs.query({
     active: false, // Don't discard the current tab
     pinned: false, // Don't discard pinned tabs
+    audible: false, // Don't discard audible tabs
   });
 
   tabs = tabs.sort(function (a, b) {
