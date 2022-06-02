@@ -6,10 +6,6 @@
     "description": "Manages open tabs by closing forgotten ones and freeing system resources.",
     "homepage_url": "https://github.com/JonasFocke01/Tabulator-Grinder",
 
-    "icons": {
-      "48": "icons/table-columns-solid.png",
-      "96": "icons/table-columns-solid copy.png"
-    },
   
     "options_ui": {
       "page": "options.html"
@@ -29,7 +25,7 @@
 
     "browser_specific_settings": {
       "gecko": {
-        "id": "jonas-focke@mailbox.org",
+        "id": "{e3d5a6b9-488e-4f91-8991-df80456ee466}",
         "strict_min_version": "42.0"
       }
     }
