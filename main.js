@@ -39,16 +39,15 @@ async function grindTabs() {
     }
   });
 
+  console.log('number', tabs.length);
+  console.log('nextIntervalLength', Math.floor(nextIntervalLength(32, 1, 30, 1500000, 0)));
+
   setTimeout(() => {
     grindTabs();
-  }, options.useDynamicInterval ? Math.floor(nextIntervalLength(tabs.length)) : options.frequency);
+  }, options.useDynamicInterval ? Math.floor(nextIntervalLength(tabs.length, 1, 30, 1500000, 0)) : options.frequency);
 }
 
-function nextIntervalLength(val) {
-  return expMap(val, 1, 100, -10000, 3000000)
-}
-
-function expMap(x, in_min, in_max, out_min, out_max) {
+function nextIntervalLength(x, in_min, in_max, out_min, out_max) {
   return (
     ((x - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min
   );
