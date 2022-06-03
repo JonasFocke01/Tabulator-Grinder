@@ -22,8 +22,8 @@ async function grindTabs() {
     return a.lastAccessed - b.lastAccessed;
   });
 
-  if (discardAmount > 0) {
-    for (let i = 0; i < discardAmount * tabs.length; i++) {
+  if (options.discardAmount > 0) {
+    for (let i = 0; i < options.discardAmount * tabs.length; i++) {
       browser.tabs.discard(tabs[i].id);
     }
   }
