@@ -1,7 +1,7 @@
 const defaultOptions = {
-  tabsToKeepOpen: 6,
-  closeNewTabs: true,
-  frequency: 5000,
+  tabsToKeepOpen: 15,
+  closeNewTabs: false,
+  frequency: 3600000,
   discardAmount: 0,
 };
 
