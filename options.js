@@ -21,7 +21,7 @@ async function saveOptions(e) {
 }
 
 async function loadOptions() {
-  const options = await browser.storage.sync.get();
+  const options = await browser.storage.local.get();
   document.getElementById("tabsToKeepOpen").value =
     options.tabsToKeepOpen
   document.getElementById("closeNewTabs").checked =

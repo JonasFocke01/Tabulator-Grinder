@@ -8,11 +8,13 @@ const defaultOptions = {
 
 async function grindTabs() {
   console.log("grindTabs");
-  const userOptions = await browser.storage.sync.get();
+  const userOptions = await browser.storage.local.get();
+  console.log(userOptions)
   const options = {
     ...defaultOptions,
     ...userOptions,
   };
+  console.log(options)
   let tabs = await browser.tabs.query({
     active: false, // Don't discard the current tab
     pinned: false, // Don't discard pinned tabs
