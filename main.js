@@ -3,6 +3,7 @@ const defaultOptions = {
   closeNewTabs: false,
   frequency: 3600000,
   discardAmount: 0,
+  useDynamicInterval: false
 };
 
 async function grindTabs() {
@@ -37,9 +38,20 @@ async function grindTabs() {
       browser.tabs.remove(tab.id);
     }
   });
+
   setTimeout(() => {
     grindTabs();
-  }, options.frequency);
+  }, options.useDynamicInterval ? Math.floor(nextIntervalLength(tabs.length)) : options.frequency);
+}
+
+function nextIntervalLength(val) {
+  return expMap(val, 1, 100, -10000, 3000000)
+}
+
+function expMap(x, in_min, in_max, out_min, out_max) {
+  return (
+    ((x - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min
+  );
 }
 
 grindTabs();
