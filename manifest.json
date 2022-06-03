@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Tabulator Grinder",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "version_name": "Angle Grinder",
     "author": "Jonas Focke",
     "description": "Manages open tabs by closing forgotten ones and freeing system resources.",
