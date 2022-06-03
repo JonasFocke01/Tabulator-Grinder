@@ -29,3 +29,6 @@ async function loadOptions() {
   document.querySelector("[name=discardAmount]").value =
     options.discardAmount || 0;
 }
+
+document.addEventListener("DOMContentLoaded", loadOptions);
+document.querySelector("form").addEventListener("submit", saveOptions);
