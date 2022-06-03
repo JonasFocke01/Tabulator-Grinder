@@ -7,12 +7,14 @@ async function saveOptions(e) {
   const closeNewTabs = form.get("closeNewTabs") === "on";
   const frequency = Number(form.get("frequency"));
   const discardAmount = Number(form.get("discardAmount"));
+  const useDynamicInterval = Number(form.get("frequency")) === 1 ? true : false;
 
   const options = {
     tabsToKeepOpen,
     closeNewTabs,
     frequency,
     discardAmount,
+    useDynamicInterval,
   };
 
   browser.storage.local.set(options);
