@@ -39,9 +39,6 @@ async function grindTabs() {
     }
   });
 
-  console.log('number', tabs.length);
-  console.log('nextIntervalLength', Math.floor(nextIntervalLength(32, 1, 30, 1500000, 0)));
-
   setTimeout(() => {
     grindTabs();
   }, options.useDynamicInterval ? Math.floor(nextIntervalLength(tabs.length, 1, 30, 1500000, 0)) : options.frequency);
