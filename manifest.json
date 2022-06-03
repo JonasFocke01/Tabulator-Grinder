@@ -7,7 +7,6 @@
     "description": "Manages open tabs by closing forgotten ones and freeing system resources.",
     "homepage_url": "https://github.com/JonasFocke01/Tabulator-Grinder",
 
-  
     "options_ui": {
       "page": "options.html"
     },
@@ -29,7 +28,15 @@
         "id": "{e3d5a6b9-488e-4f91-8991-df80456ee466}",
         "strict_min_version": "42.0"
       }
+    },
+
+    "icons": {
+      "48": "icons/default.png"
+    },
+
+    "browser_action": {
+      "default_icon": "icons/default.png",
+      "default_title": "Tabulator Grinder"
     }
-    
   }
   
