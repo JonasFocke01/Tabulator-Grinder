@@ -20,7 +20,6 @@ async function saveOptions(e) {
     useDynamicInterval: useDynamicFrequency,
   };
 
-  console.log(options);
   browser.storage.sync.set(options);
 }
 
