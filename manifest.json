@@ -1,44 +1,36 @@
 {
-    "manifest_version": 2,
-    "name": "Tabulator Grinder",
-    "version": "1.0.7",
-    "version_name": "Angle Grinder",
-    "author": "Jonas Focke",
-    "description": "Manages open tabs by closing forgotten ones and freeing system resources.",
-    "homepage_url": "https://github.com/JonasFocke01/Tabulator-Grinder",
+  "manifest_version": 2,
+  "name": "Tabulator Grinder",
+  "version": "1.0.7",
+  "version_name": "Angle Grinder",
+  "author": "Jonas Focke",
+  "description": "Manages open tabs by closing forgotten ones and freeing system resources.",
+  "homepage_url": "https://github.com/JonasFocke01/Tabulator-Grinder",
 
-    "options_ui": {
-      "page": "options.html"
-    },
-  
-    "permissions": [
-      "menus",
-      "storage",
-      "tabs",
-      "activeTab"
-    ],
+  "options_ui": {
+    "page": "options.html"
+  },
 
-    "background": {
-      "scripts": [
-        "main.js"
-      ]
-    },
+  "permissions": ["menus", "storage", "tabs", "activeTab"],
 
-    "browser_specific_settings": {
-      "gecko": {
-        "id": "{e3d5a6b9-488e-4f91-8991-df80456ee466}",
-        "strict_min_version": "42.0"
-      }
-    },
+  "background": {
+    "scripts": ["main.js"]
+  },
 
-    "icons": {
-      "48": "icons/default.png"
-    },
-
-    "browser_action": {
-      "default_icon": "icons/default.png",
-      "default_title": "Tabulator Grinder",
-      "default_popup": "popup.html"
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{e3d5a6b9-488e-4f91-8991-df80456ee466}",
+      "strict_min_version": "42.0"
     }
+  },
+
+  "icons": {
+    "48": "icons/default.png"
+  },
+
+  "browser_action": {
+    "default_icon": "icons/default.png",
+    "default_title": "Tabulator Grinder",
+    "default_popup": "options.html"
   }
-  
+}
