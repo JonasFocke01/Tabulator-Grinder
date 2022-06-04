@@ -51,7 +51,7 @@ async function grindTabs() {
     //close tabs
     if (storage.tabsToKeepOpen < tabs.length) {
       await browser.tabs.remove(tabs[0].id);
-      changeBadge(tabs.length);
+      changeBadge(tabs.length - 1);
     }
   }
 
