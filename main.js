@@ -50,7 +50,8 @@ async function grindTabs() {
 
     //close tabs
     if (storage.tabsToKeepOpen < tabs.length) {
-      browser.tabs.remove(tabs[0].id);
+      await browser.tabs.remove(tabs[0].id);
+      changeBadge(tabs[0].id);
     }
   }
 
@@ -71,7 +72,6 @@ function nextIntervalLength(x, in_min, in_max, out_min, out_max) {
 
 setInterval(() => grindTabs(), 10000);
 
-//! Make this more responsive
 browser.windows.onFocusChanged.addListener(changeBadge);
 browser.tabs.onCreated.addListener(changeBadge);
 browser.tabs.onRemoved.addListener(changeBadge);
