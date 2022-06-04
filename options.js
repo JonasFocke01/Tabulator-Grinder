@@ -17,7 +17,7 @@ async function saveOptions(e) {
     closeNewTabs,
     frequency,
     discardAmount,
-    useDynamicInterval: useDynamicFrequency,
+    useDynamicFrequency,
   };
 
   browser.storage.sync.set(options);
@@ -25,10 +25,17 @@ async function saveOptions(e) {
 
 async function loadOptions() {
   const options = await browser.storage.sync.get();
-  document.getElementById("tabsToKeepOpen").value = options.tabsToKeepOpen;
+  document.getElementById("tabsToKeepOpen").value =
+    options.tabsToKeepOpen ?? 30;
   document.getElementById("closeNewTabs").checked = options.closeNewTabs;
   document.getElementById("frequency").value = options.frequency;
   document.getElementById("discardAmount").value = options.discardAmount;
+
+  document.getElementById("nextIteration").innerText =
+    "Next run in " +
+    Math.floor(
+      Math.abs(Date.now() - new Date(options.nextRun)) / 1000 / 60 + " minutes!"
+    );
 }
 
 document.addEventListener("DOMContentLoaded", loadOptions);
