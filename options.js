@@ -3,11 +3,14 @@ async function saveOptions(e) {
 
   const form = new FormData(document.getElementById("myForm"));
 
-  const tabsToKeepOpen = Number(document.getElementById("tabsToKeepOpen").value);
+  const tabsToKeepOpen = Number(
+    document.getElementById("tabsToKeepOpen").value
+  );
   const closeNewTabs = document.getElementById("closeNewTabs").checked;
   const frequency = Number(document.getElementById("frequency").value);
   const discardAmount = Number(document.getElementById("discardAmount").value);
-  const useDynamicInterval = Number(document.getElementById("frequency").value) === 1 ? true : false;
+  const useDynamicInterval =
+    Number(document.getElementById("frequency").value) === 1 ? true : false;
 
   const options = {
     tabsToKeepOpen,
@@ -22,14 +25,10 @@ async function saveOptions(e) {
 
 async function loadOptions() {
   const options = await browser.storage.local.get();
-  document.getElementById("tabsToKeepOpen").value =
-    options.tabsToKeepOpen
-  document.getElementById("closeNewTabs").checked =
-    options.closeNewTabs
-  document.getElementById("frequency").value =
-    options.frequency
-  document.getElementById("discardAmount").value =
-    options.discardAmount
+  document.getElementById("tabsToKeepOpen").value = options.tabsToKeepOpen;
+  document.getElementById("closeNewTabs").checked = options.closeNewTabs;
+  document.getElementById("frequency").value = options.frequency;
+  document.getElementById("discardAmount").value = options.discardAmount;
 }
 
 document.addEventListener("DOMContentLoaded", loadOptions);
