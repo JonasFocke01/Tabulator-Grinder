@@ -33,9 +33,8 @@ async function loadOptions() {
 
   document.getElementById("nextIteration").innerText =
     "Next run in " +
-    Math.floor(
-      Math.abs(Date.now() - new Date(options.nextRun)) / 1000 / 60 + " minutes!"
-    );
+    Math.floor(Math.abs(Date.now() - new Date(options.nextRun)) / 1000 / 60) +
+    " minutes!";
 }
 
 document.addEventListener("DOMContentLoaded", loadOptions);
