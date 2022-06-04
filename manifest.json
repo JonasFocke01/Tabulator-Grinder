@@ -14,7 +14,8 @@
     "permissions": [
       "menus",
       "storage",
-      "tabs"
+      "tabs",
+      "activeTab"
     ],
 
     "background": {
@@ -36,7 +37,8 @@
 
     "browser_action": {
       "default_icon": "icons/default.png",
-      "default_title": "Tabulator Grinder"
+      "default_title": "Tabulator Grinder",
+      "default_popup": "popup.html"
     }
   }
   
