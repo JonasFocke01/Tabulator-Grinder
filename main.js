@@ -79,6 +79,7 @@ browser.tabs.onRemoved.addListener(changeBadge);
 async function changeBadge(e) {
   const tabs = await browser.tabs.query({
     currentWindow: true, //Only get tabs from the active window
+    pinned: false,
   });
 
   if (e) {
