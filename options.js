@@ -9,7 +9,7 @@ async function saveOptions(e) {
   const closeNewTabs = document.getElementById("closeNewTabs").checked;
   const frequency = Number(document.getElementById("frequency").value);
   const discardAmount = Number(document.getElementById("discardAmount").value);
-  const useDynamicInterval =
+  const useDynamicFrequency =
     Number(document.getElementById("frequency").value) === 1 ? true : false;
 
   const options = {
@@ -17,14 +17,15 @@ async function saveOptions(e) {
     closeNewTabs,
     frequency,
     discardAmount,
-    useDynamicInterval,
+    useDynamicInterval: useDynamicFrequency,
   };
 
-  browser.storage.local.set(options);
+  console.log(options);
+  browser.storage.sync.set(options);
 }
 
 async function loadOptions() {
-  const options = await browser.storage.local.get();
+  const options = await browser.storage.sync.get();
   document.getElementById("tabsToKeepOpen").value = options.tabsToKeepOpen;
   document.getElementById("closeNewTabs").checked = options.closeNewTabs;
   document.getElementById("frequency").value = options.frequency;
