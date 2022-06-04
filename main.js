@@ -47,6 +47,11 @@ async function grindTabs() {
   });
 
   //recursion
+  browser.storage.local.set({
+      nextRun: Date.now() + options.useDynamicInterval 
+      ? Math.floor(nextIntervalLength(tabs.length, 1, 30, 1500000, 0)) 
+      : options.frequency
+    });
   setTimeout(() => {
     grindTabs();
   }, options.useDynamicInterval ? Math.floor(nextIntervalLength(tabs.length, 1, 30, 1500000, 0)) : options.frequency);
@@ -60,6 +65,7 @@ function nextIntervalLength(x, in_min, in_max, out_min, out_max) {
 
 grindTabs();
 
+//!IDEA: STORE NEXT RUN IN GLOBAL VAR, THEN RUN EVERY MINUTE AND CHECK IF NEXT RUN IS NOT. THAT GIVES POSSIBILITY TO MANIPULATE NEXT RUN.
 browser.windows.onFocusChanged.addListener(async (e) => {
   const tabs = await browser.tabs.query({
     currentWindow: true, //Only get tabs from the active window
