@@ -33,6 +33,7 @@ async function grindTabs() {
       browser.tabs.remove(tab.id);
     }
   });
+  changeBadge(tabs[0].windowId);
   tabs = tabs.filter((t) => t.name !== "New Tab");
 
   if (Date.now() > storage.nextRun) {
