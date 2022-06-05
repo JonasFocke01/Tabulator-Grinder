@@ -30,14 +30,12 @@ async function grindTabs() {
 
   //close all New Tabs
   tabs.forEach((tab) => {
-    // console.log(tab.title);
     if (storage.closeNewTabs && tab.title === "New Tab") {
       browser.tabs.remove(tab.id);
     }
   });
   // console.log(tabs);
   tabs = tabs.filter((t) => t.name !== "New Tab");
-  // console.log(tabs);
 
   if (Date.now() > storage.nextRun) {
     browser.storage.sync.set({ lastRun: Date.now() });
