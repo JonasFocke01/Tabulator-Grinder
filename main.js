@@ -9,7 +9,6 @@ const defaultOptions = {
 let windowId = 0;
 
 async function grindTabs() {
-  // console.log("grindingTabs");
   const browserStorage = await browser.storage.sync.get();
   const storage = {
     ...defaultOptions,
@@ -34,7 +33,6 @@ async function grindTabs() {
       browser.tabs.remove(tab.id);
     }
   });
-  // console.log(tabs);
   tabs = tabs.filter((t) => t.name !== "New Tab");
 
   if (Date.now() > storage.nextRun) {
