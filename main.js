@@ -53,7 +53,7 @@ async function grindTabs() {
   }
 
   //calculate next iteration
-  let nextRun = storage.useDynamicInterval
+  let nextRun = storage.useDynamicFrequency
     ? nextIntervalLength(tabs.length, 1, 30, 1500000, 0) +
       Date.now() -
       (Date.now() - storage.lastRun)
