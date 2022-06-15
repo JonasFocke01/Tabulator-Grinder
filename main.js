@@ -15,7 +15,6 @@ async function grindTabs() {
     ...defaultOptions,
     ...browserStorage,
   };
-  console.log(storage);
   if (!storage.paused) {
     let tabs = await browser.tabs.query({
       active: false, // Don't discard the current tab
@@ -61,12 +60,12 @@ async function grindTabs() {
         (Date.now() - storage.lastRun)
       : storage.frequency + Date.now() - (Date.now() - storage.lastRun);
 
-    console.log('next run will be at: ' + new Date(nextRun));
+    // console.log('next run will be at: ' + new Date(nextRun));
     browser.storage.sync.set({ nextRun });
   } else {
-    console.log('Paused');
+    // console.log('Paused');
     let nextRun = Date.now() + 3600000;
-    console.log('next run will be at: ' + new Date(nextRun));
+    // console.log('next run will be at: ' + new Date(nextRun));
 
     browser.storage.sync.set({ nextRun });
   }
