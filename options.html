@@ -101,60 +101,56 @@
 </style>
 
 <div style="margin: 2rem">
-    <h2 id="nextIteration" style="color: white" >Next run in 69 minutes</h2>
-    <!-- <p  style="color: white" id="nextIteration"></p> -->
-    <h2 style="color: white" >Configuration</h2>
-    <p style="color: white">
-      This extension runs at a linear set of Minutes or dynamic.
-    </p>
-    <p style="color: white">linear: The plugin will run every X minutes.</p>
-    <p style="color: white">
-      Dynamic: Depending on the amount of tabs you have currently open. Lets say
-      20 tabs open results in a runtime of 10 minutes, but only 5 tabs open
-      results in up to 30 minutes until the next iteration.
-    </p>
-    <form id="myForm">
-      <label style="color: white">How often should the plugin run?</label>
-      <select id="frequency" style="margin-top: -1rem">
-        <option value="1">Dynamic</option>
-        <option value="60000">Every minute</option>
-        <option value="300000">Every 5 minutes</option>
-        <option value="600000">Every 10 minutes</option>
-        <option value="900000">Every 15 minutes</option>
-        <option value="1800000">Every 30 minutes</option>
-        <option value="3600000">Every hour</option>
-      </select>
-      <div style="margin-top: 1rem">
-        <label style="color: white">How many tabs should stay open</label>
-        <input id="tabsToKeepOpen" type="number" name="" required="" />
-      </div>
-      <div style=" margin-top: 1rem">
-
-          <label style="color: white;">
-            If a "New Tab" lose focus, it should close
-        </label>
-        <input
-        id="closeNewTabs"
-        type="checkbox"
-        style="margin-top: -1rem"
-        />
+  <h2 id="nextIteration" style="color: white">Next run in 69 minutes</h2>
+  <button id="pause">Pause</button>
+  <h2 style="color: white">Configuration</h2>
+  <p style="color: white">
+    This extension runs at a linear set of Minutes or dynamic.
+  </p>
+  <p style="color: white">linear: The plugin will run every X minutes.</p>
+  <p style="color: white">
+    Dynamic: Depending on the amount of tabs you have currently open. Lets say
+    20 tabs open results in a runtime of 10 minutes, but only 5 tabs open
+    results in up to 30 minutes until the next iteration.
+  </p>
+  <form id="configuration">
+    <label style="color: white">How often should the plugin run?</label>
+    <select id="frequency" style="margin-top: -1rem">
+      <option value="1">Dynamic</option>
+      <option value="60000">Every minute</option>
+      <option value="300000">Every 5 minutes</option>
+      <option value="600000">Every 10 minutes</option>
+      <option value="900000">Every 15 minutes</option>
+      <option value="1800000">Every 30 minutes</option>
+      <option value="3600000">Every hour</option>
+    </select>
+    <div style="margin-top: 1rem">
+      <label style="color: white">How many tabs should stay open</label>
+      <input id="tabsToKeepOpen" type="number" name="" required="" />
+    </div>
+    <div style="margin-top: 1rem">
+      <label style="color: white">
+        If a "New Tab" lose focus, it should close
+      </label>
+      <input id="closeNewTabs" type="checkbox" style="margin-top: -1rem" />
     </div>
     <div>
-        <label style="color: white; margin-top: 1rem">
-            How many tabs sould be suspended
-        </label>
-        <select id="discardAmount" style="margin-top: 1rem">
-            <option value="0">None</option>
-            <option value="0.3">Oldest 1/3</option>
-            <option value="0.5">Oldest half</option>
-            <option value="0.6">Oldest 2/3</option>
-            <option value="0.7">Oldest 3/4</option>
-            <option value="1">Every except the active</option>
-        </select>
+      <label style="color: white; margin-top: 1rem">
+        How many tabs sould be suspended
+      </label>
+      <select id="discardAmount" style="margin-top: 1rem">
+        <option value="0">None</option>
+        <option value="0.3">Oldest 1/3</option>
+        <option value="0.5">Oldest half</option>
+        <option value="0.6">Oldest 2/3</option>
+        <option value="0.7">Oldest 3/4</option>
+        <option value="1">Every except the active</option>
+      </select>
     </div>
-      <button id="save" style="transform: scale(1.5); margin-top: 1rem">Save</button>
-    </form>
-  </div>
+    <button id="save" style="transform: scale(1.5); margin-top: 1rem">
+      Save
+    </button>
+  </form>
 
   <script src="popup.js"></script>
   <script src="options.js"></script>
