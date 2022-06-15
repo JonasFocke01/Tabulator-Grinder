@@ -31,7 +31,7 @@ async function loadOptions() {
   document.getElementById('frequency').value = options.frequency;
   document.getElementById('discardAmount').value = options.discardAmount;
 
-  document.getElementById('nextIteration').innerText = options.pause
+  document.getElementById('nextIteration').innerText = !options.paused
     ? 'Next run in ' +
       Math.floor(Math.abs(Date.now() - new Date(options.nextRun)) / 1000 / 60) +
       ' minutes!'
@@ -40,13 +40,13 @@ async function loadOptions() {
 
 async function pauseGrind() {
   const options = await browser.storage.sync.get();
-  options.pause = !options.pause;
-  document.getElementById('nextIteration').innerText = options.pause
-    ? 'Next run in ' +
-      Math.floor(Math.abs(Date.now() - new Date(options.nextRun)) / 1000 / 60) +
-      ' minutes!'
-    : 'Paused';
+  options.paused = !options.paused;
   browser.storage.sync.set(options);
+  loadOptions();
+  browser.runtime.sendMessage({
+    type: 'pauseGrind',
+    paused: options.paused,
+  });
 }
 
 document.addEventListener('DOMContentLoaded', loadOptions);

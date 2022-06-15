@@ -15,7 +15,7 @@ async function grindTabs() {
     ...defaultOptions,
     ...browserStorage,
   };
-
+  console.log(storage);
   if (!storage.paused) {
     let tabs = await browser.tabs.query({
       active: false, // Don't discard the current tab
@@ -66,6 +66,8 @@ async function grindTabs() {
   } else {
     console.log('Paused');
     let nextRun = Date.now() + 3600000;
+    console.log('next run will be at: ' + new Date(nextRun));
+
     browser.storage.sync.set({ nextRun });
   }
 }
@@ -76,9 +78,10 @@ function nextIntervalLength(x, in_min, in_max, out_min, out_max) {
 
 setInterval(() => grindTabs(), 10000);
 
-browser.windows.onFocusChanged.addListener(changeBadge);
-browser.tabs.onCreated.addListener(changeBadge);
-browser.tabs.onRemoved.addListener(changeBadge);
+function handleMessage(message) {
+  // console.log(message);
+  grindTabs();
+}
 
 async function changeBadge(e) {
   const tabs = await browser.tabs.query({
@@ -94,3 +97,8 @@ async function changeBadge(e) {
     browser.browserAction.setBadgeBackgroundColor({ color: '#1ed84c' });
   }
 }
+
+browser.windows.onFocusChanged.addListener(changeBadge);
+browser.tabs.onCreated.addListener(changeBadge);
+browser.tabs.onRemoved.addListener(changeBadge);
+browser.runtime.onMessage.addListener(handleMessage);
