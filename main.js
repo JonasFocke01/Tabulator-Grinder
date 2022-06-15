@@ -63,6 +63,10 @@ async function grindTabs() {
 
     console.log('next run will be at: ' + new Date(nextRun));
     browser.storage.sync.set({ nextRun });
+  } else {
+    console.log('Paused');
+    let nextRun = Date.now() + 3600000;
+    browser.storage.sync.set({ nextRun });
   }
 }
 
