@@ -32,10 +32,28 @@ async function loadOptions() {
   document.getElementById('discardAmount').value = options.discardAmount;
 
   document.getElementById('nextIteration').innerText = !options.paused
-    ? 'Next run in ' +
-      Math.floor(Math.abs(Date.now() - new Date(options.nextRun)) / 1000 / 60) +
-      ' minutes!'
+    ? waitForRealNextRun()
     : 'Paused';
+  document.getElementById('pause').textContent = options.paused
+    ? 'Resume'
+    : 'Pause';
+}
+
+async function waitForRealNextRun() {
+  const storage = await browser.storage.sync.get();
+  if (
+    Math.floor(Math.abs(Date.now() - new Date(storage.nextRun)) / 1000 / 60) >
+    55
+  ) {
+    setTimeout(() => {
+      waitForRealNextRun();
+    });
+  } else {
+    document.getElementById('nextIteration').innerText =
+      'Next run in ' +
+      Math.floor(Math.abs(Date.now() - new Date(storage.nextRun)) / 1000 / 60) +
+      ' minutes!';
+  }
 }
 
 async function pauseGrind() {
