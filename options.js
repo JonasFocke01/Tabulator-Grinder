@@ -1,7 +1,7 @@
 async function saveOptions(e) {
-  e.preventDefault();
+  e ? e.preventDefault() : null;
 
-  const form = new FormData(document.getElementById('myForm'));
+  // const form = new FormData(document.getElementById('myForm'));
 
   const tabsToKeepOpen = Number(
     document.getElementById('tabsToKeepOpen').value
@@ -24,6 +24,7 @@ async function saveOptions(e) {
 }
 
 async function loadOptions() {
+  await saveOptions();
   const options = await browser.storage.sync.get();
   document.getElementById('tabsToKeepOpen').value =
     options.tabsToKeepOpen ?? 30;
@@ -67,7 +68,11 @@ async function pauseGrind() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', loadOptions);
+document.addEventListener('DOMContentLoaded', setRequiredInterval);
+async function setRequiredInterval() {
+  setInterval(loadOptions(), 1000);
+}
+
 document
   .getElementById('configuration')
   .addEventListener('submit', saveOptions);
