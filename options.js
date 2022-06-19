@@ -1,8 +1,6 @@
 async function saveOptions(e) {
   e.preventDefault();
 
-  const form = new FormData(document.getElementById('myForm'));
-
   const tabsToKeepOpen = Number(
     document.getElementById('tabsToKeepOpen').value
   );
