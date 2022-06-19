@@ -17,9 +17,6 @@ async function grindTabs() {
   };
   if (!storage.paused) {
     let tabs = await browser.tabs.query({
-      active: false, // Don't discard the current tab
-      pinned: false, // Don't discard pinned tabs
-      audible: false, // Don't discard audible tabs
       currentWindow: true, //Only get tabs from the active window
     });
 
@@ -35,7 +32,6 @@ async function grindTabs() {
       }
     });
     changeBadge(tabs[0].windowId);
-    tabs = tabs.filter((t) => t.name !== 'New Tab');
 
     if (Date.now() > storage.nextRun) {
       browser.storage.sync.set({ lastRun: Date.now() });
@@ -46,9 +42,14 @@ async function grindTabs() {
         }
       }
 
-      //close tabs
+      //close tab
       if (storage.tabsToKeepOpen < tabs.length) {
-        await browser.tabs.remove(tabs[0].id);
+        await browser.tabs.remove(
+          tabs.find(
+            (el) =>
+              !el.pinned && !el.audible && !el.name !== 'New Tab' && !el.active
+          ).id
+        );
         changeBadge(tabs[0].windowId);
       }
     }
@@ -85,12 +86,13 @@ function handleMessage(message) {
 async function changeBadge(e) {
   const tabs = await browser.tabs.query({
     currentWindow: true, //Only get tabs from the active window
-    pinned: false,
   });
-
   if (e) {
     browser.browserAction.setBadgeText({
-      text: tabs.length + '',
+      text:
+        tabs.filter((el) => el.pinned).length +
+        '|' +
+        tabs.filter((el) => !el.pinned).length,
       windowId: e.windowId ?? e,
     });
     browser.browserAction.setBadgeBackgroundColor({ color: '#1ed84c' });
