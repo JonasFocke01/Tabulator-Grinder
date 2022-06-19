@@ -60,12 +60,9 @@ async function grindTabs() {
         (Date.now() - storage.lastRun)
       : storage.frequency + Date.now() - (Date.now() - storage.lastRun);
 
-    // console.log('next run will be at: ' + new Date(nextRun));
     browser.storage.sync.set({ nextRun });
   } else {
-    // console.log('Paused');
     let nextRun = Date.now() + 3600000;
-    // console.log('next run will be at: ' + new Date(nextRun));
 
     browser.storage.sync.set({ nextRun });
   }
@@ -78,7 +75,6 @@ function nextIntervalLength(x, in_min, in_max, out_min, out_max) {
 setInterval(() => grindTabs(), 10000);
 
 function handleMessage(message) {
-  // console.log(message);
   grindTabs();
 }
 
