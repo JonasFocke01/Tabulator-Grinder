@@ -45,7 +45,7 @@ async function grindTabs() {
       //close tab
       if (storage.tabsToKeepOpen < tabs.length) {
         await browser.tabs.remove(
-          tabs.find(
+          tabs.findIndex(
             (el) =>
               !el.pinned && !el.audible && !el.name !== 'New Tab' && !el.active
           ).id
