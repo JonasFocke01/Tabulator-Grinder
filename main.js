@@ -27,7 +27,7 @@ async function grindTabs() {
 
     //close all New Tabs
     tabs.forEach((tab) => {
-      if (storage.closeNewTabs && tab.title === 'New Tab') {
+      if (storage.closeNewTabs && tab.title === 'New Tab' && !tab.active) {
         browser.tabs.remove(tab.id);
       }
     });
