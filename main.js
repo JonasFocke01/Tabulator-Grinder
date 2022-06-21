@@ -78,7 +78,7 @@ function nextIntervalLength(x, in_min, in_max, out_min, out_max) {
 
 setInterval(() => grindTabs(), 10000);
 
-function handleMessage(message) {
+function handleMessage() {
   // console.log(message);
   grindTabs();
 }
