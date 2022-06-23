@@ -66,6 +66,9 @@ async function grindTabs() {
 
     browser.storage.sync.set({ nextRun });
   }
+  browser.runtime.sendMessage({
+    type: 'updateText',
+  });
 }
 
 function nextIntervalLength(x, in_min, in_max, out_min, out_max) {

@@ -54,6 +54,11 @@ async function waitForRealNextRun() {
       'Next run in ' +
       Math.floor(Math.abs(Date.now() - new Date(storage.nextRun)) / 1000 / 60) +
       ' minutes!';
+    return (
+      'Next run in ' +
+      Math.floor(Math.abs(Date.now() - new Date(storage.nextRun)) / 1000 / 60) +
+      ' minutes!'
+    );
   }
 }
 
@@ -68,11 +73,20 @@ async function pauseGrind() {
   });
 }
 
+function handleMessage(message) {
+  console.log(message);
+  if (message.type === 'updateText') {
+    document.getElementById('nextIteration').innerText = !options.paused
+      ? waitForRealNextRun()
+      : 'Paused';
+  }
+}
+
 document.addEventListener('DOMContentLoaded', setRequiredInterval);
 async function setRequiredInterval() {
   setInterval(loadOptions(), 1000);
 }
-
+browser.runtime.onMessage.addListener(handleMessage);
 document
   .getElementById('configuration')
   .addEventListener('submit', saveOptions);
