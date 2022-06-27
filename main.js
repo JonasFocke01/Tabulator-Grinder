@@ -43,9 +43,16 @@ async function grindTabs() {
       }
 
       //close tab
+      console.log(tabs);
+      console.log(
+        tabs.find(
+          (el) =>
+            !el.pinned && !el.audible && el.name !== 'New Tab' && !el.active
+        ).id
+      );
       if (storage.tabsToKeepOpen < tabs.length) {
         await browser.tabs.remove(
-          tabs.findIndex(
+          tabs.find(
             (el) =>
               !el.pinned && !el.audible && el.name !== 'New Tab' && !el.active
           ).id
@@ -56,19 +63,12 @@ async function grindTabs() {
 
     //calculate next iteration
     let nextRun = storage.useDynamicFrequency
-      ? nextIntervalLength(tabs.length, 1, 30, 1500000, 0) +
-        Date.now() -
-        (Date.now() - storage.lastRun)
-      : storage.frequency + Date.now() - (Date.now() - storage.lastRun);
+      ? nextIntervalLength(tabs.length, 1, 30, 1500000, 0) + storage.lastRun
+      : storage.frequency + storage.lastRun;
 
-    // console.log('next run will be at: ' + new Date(nextRun));
     browser.storage.sync.set({ nextRun });
   } else {
-    // console.log('Paused');
-    let nextRun = Date.now() + 3600000;
-    // console.log('next run will be at: ' + new Date(nextRun));
-
-    browser.storage.sync.set({ nextRun });
+    browser.storage.sync.set({ nextRun: Date.now() + 3600000 });
   }
 }
 
@@ -81,7 +81,6 @@ function nextIntervalLength(x, in_min, in_max, out_min, out_max) {
 setInterval(() => grindTabs(), 10000);
 
 function handleMessage() {
-  // console.log(message);
   grindTabs();
 }
 
