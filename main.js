@@ -47,7 +47,7 @@ async function grindTabs() {
         await browser.tabs.remove(
           tabs.findIndex(
             (el) =>
-              !el.pinned && !el.audible && !el.name !== 'New Tab' && !el.active
+              !el.pinned && !el.audible && el.name !== 'New Tab' && !el.active
           ).id
         );
         changeBadge(tabs[0].windowId);
