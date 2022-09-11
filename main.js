@@ -43,13 +43,6 @@ async function grindTabs() {
       }
 
       //close tab
-      console.log(tabs);
-      console.log(
-        tabs.find(
-          (el) =>
-            !el.pinned && !el.audible && el.name !== 'New Tab' && !el.active
-        ).id
-      );
       if (storage.tabsToKeepOpen < tabs.length) {
         await browser.tabs.remove(
           tabs.find(
