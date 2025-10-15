@@ -24,10 +24,10 @@ async function saveOptions(e) {
 async function loadOptions() {
   const options = await browser.storage.sync.get();
   document.getElementById('tabsToKeepOpen').value =
-    options.tabsToKeepOpen ?? 30;
+    options.tabsToKeepOpen ?? 20;
   document.getElementById('closeNewTabs').checked = options.closeNewTabs;
-  document.getElementById('frequency').value = options.frequency;
-  document.getElementById('discardAmount').value = options.discardAmount;
+  document.getElementById('frequency').value = options.frequency ?? "1";
+  document.getElementById('discardAmount').value = options.discardAmount ?? "0.5";
 
   document.getElementById('nextIteration').innerText = !options.paused
     ? waitForRealNextRun()
@@ -45,7 +45,7 @@ async function waitForRealNextRun() {
   ) {
     setTimeout(() => {
       waitForRealNextRun();
-    });
+    }, 1000);
   } else {
     document.getElementById('nextIteration').innerText =
       'Next run in ' +

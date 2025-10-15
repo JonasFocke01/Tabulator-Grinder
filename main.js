@@ -7,9 +7,12 @@ const defaultOptions = {
   paused: false,
 };
 
-let windowId = 0;
+let ginding = false;
 
 async function grindTabs() {
+  if (grinding) return;
+  grinding = true;
+
   const browserStorage = await browser.storage.sync.get();
   const storage = {
     ...defaultOptions,
@@ -26,11 +29,13 @@ async function grindTabs() {
     });
 
     //close all New Tabs
-    tabs.forEach((tab) => {
-      if (storage.closeNewTabs && tab.title === 'New Tab' && !tab.active) {
-        browser.tabs.remove(tab.id);
-      }
-    });
+    if (storage.closeNewTabs) {
+      tabs.forEach((tab) => {
+        if (tab.title === 'New Tab' && !tab.active && tab.lasAccessed + 20000 > Date.now()) {
+          browser.tabs.remove(tab.id);
+        }
+      });
+    }
     changeBadge(tabs[0].windowId);
 
     if (Date.now() > storage.nextRun) {
@@ -60,18 +65,28 @@ async function grindTabs() {
       : storage.frequency + storage.lastRun;
 
     browser.storage.sync.set({ nextRun });
+
   } else {
     browser.storage.sync.set({ nextRun: Date.now() + 3600000 });
   }
+
+  grinding = false;
 }
 
 function nextIntervalLength(x, in_min, in_max, out_min, out_max) {
-  return x < in_max
-    ? ((x - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min
-    : out_max;
+    if (x < in_min) {
+        out_min
+    } else if (x > in_max) {
+        out_max
+    } else {
+        ((x - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min
+    }
 }
 
-setInterval(() => grindTabs(), 10000);
+browser.tabs.onUpdated.addListener(grindTabs)
+browser.tabs.onActivated.addListener(grindTabs)
+browser.tabs.onRemoved.addListener(grindTabs)
+
 
 function handleMessage() {
   grindTabs();
@@ -82,14 +97,28 @@ async function changeBadge(e) {
     currentWindow: true, //Only get tabs from the active window
   });
   if (e) {
+    let unpinnedTabs = tabs.filter((el) => !el.pinned).length;
+
     browser.browserAction.setBadgeText({
-      text:
-        tabs.filter((el) => el.pinned).length +
-        '|' +
-        tabs.filter((el) => !el.pinned).length,
+      text: unpinnedTabs,
       windowId: e.windowId ?? e,
     });
-    browser.browserAction.setBadgeBackgroundColor({ color: '#1ed84c' });
+
+    const browserStorage = await browser.storage.sync.get();
+    const storage = {
+    ...defaultOptions,
+    ...browserStorage,
+    };
+
+    let n = Math.max(storage.tabsToKeepOpen, Math.min(40, unpinnedTabs));
+
+    let t = (n - storage.tabsToKeepOpen) / (40 - storage.tabsToKeepOpen);
+
+    let r = Math.round(0 + t * (255 - 0));
+    let g = Math.round(255 - t * (255 - 0));
+    let b = 0;
+
+    browser.browserAction.setBadgeBackgroundColor({ color: `rgb(${r},${g},${b})` });
   }
 }
 
