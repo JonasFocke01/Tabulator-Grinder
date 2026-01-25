@@ -1,3 +1,5 @@
+_note: The framework, or npm or something got a bunch of updates, and now i cant build the project anymore, so dont expect anything_
+
 # Tabulator-Grinder
 ### A tabmanager for Firefox
 
